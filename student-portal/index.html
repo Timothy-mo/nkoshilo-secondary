@@ -1,359 +1,200 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nkoshilo Student Portal - Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="main.js"></script>
+  <title>Nkoshilo Portal - Login</title>
   <style>
-    /* Quick inline style for demo. Move to style.css for production */
-    body, html {
-      margin: 0; padding: 0; height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      background: #f9fafb;
-      color: #333;
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
-    .container {
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+        Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: linear-gradient(to right, #008080, #004d4d);
       display: flex;
-      height: 100vh;
-      overflow: hidden;
-      background: #fff;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      font-size: 16px;
+      line-height: 1.4;
     }
 
-    /* Sidebar */
-    aside.sidebar {
-      width: 260px;
-      background: #008080;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 1.5rem;
-      box-sizing: border-box;
-      transition: width 0.3s ease;
-      box-shadow: 2px 0 12px rgba(0,0,0,0.1);
-    }
-    aside.sidebar .logo {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 3rem;
-      user-select: none;
-      text-transform: uppercase;
-      color: #fff;
+    /* Container */
+    .login-container {
+      background: #fff;
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 400px;
       text-align: center;
     }
-    aside.sidebar nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      flex-grow: 1;
-    }
-    aside.sidebar nav ul li {
-      margin-bottom: 1.8rem;
-    }
-    aside.sidebar nav ul li a {
-      color: #b2f7f7;
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-decoration: none;
-      display: block;
-      padding: 0.35rem 0.25rem;
-      border-left: 4px solid transparent;
-      transition: border-color 0.3s ease, color 0.3s ease;
-      letter-spacing: 0.03em;
-    }
-    aside.sidebar nav ul li a.active,
-    aside.sidebar nav ul li a:hover {
-      color: #fff;
-      border-left-color: #ffd700;
-      background: rgba(255, 215, 0, 0.15);
-      border-radius: 4px 0 0 4px;
+
+    /* Headings */
+    .login-container h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2rem;
+      color: #004d4d;
     }
 
-    /* Main content */
-    main.main-content {
-      flex-grow: 1;
+    .login-container p {
+      margin-bottom: 2rem;
+      color: #555;
+      opacity: 0.8;
+    }
+
+    /* Form */
+    form {
       display: flex;
       flex-direction: column;
-      padding: 2rem 3rem;
-      background: #f4f6f8;
-      overflow-y: auto;
+      text-align: left;
     }
 
-    /* Header */
-    header.header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-    header .welcome h1 {
-      margin: 0 0 0.3rem 0;
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #004d4d;
-    }
-    header .welcome p {
-      margin: 0;
-      font-weight: 500;
-      color: #555;
-      font-size: 1.1rem;
-      opacity: 0.75;
-      letter-spacing: 0.02em;
+    label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
     }
 
-    /* Header actions */
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 1.6rem;
-    }
-    .header-actions button {
-      background: none;
-      border: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: #008080;
-      transition: color 0.25s ease;
-    }
-    .header-actions button:hover {
-      color: #ffd700;
-    }
-
-    /* Profile */
-    .profile {
-      position: relative;
-    }
-    .profile-btn {
-      border-radius: 50%;
-      border: 2px solid #008080;
-      width: 42px;
-      height: 42px;
-      overflow: hidden;
-      cursor: pointer;
-      background: white;
-      padding: 0;
-    }
-    .profile-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .profile-menu {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 50px;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    input[type="text"],
+    input[type="password"] {
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      list-style: none;
-      margin: 0;
-      padding: 0.5rem 0;
-      min-width: 140px;
-      z-index: 20;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      width: 100%;
     }
-    .profile-menu.show {
-      display: block;
+
+    input:focus {
+      border-color: #008080;
+      outline: none;
     }
-    .profile-menu li {
-      margin: 0;
+
+    /* Button */
+    button {
+      background: #008080;
+      color: white;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
     }
-    .profile-menu a {
-      color: #333;
-      display: block;
-      padding: 0.6rem 1rem;
+
+    button:hover,
+    button:focus {
+      background: #006666;
+    }
+
+    /* Footer & links */
+    .footer-text {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .footer-text a {
+      color: #008080;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-text a:hover,
+    .footer-text a:focus {
+      text-decoration: underline;
+    }
+
+    .back-to-menu {
+      margin-top: 1rem;
+    }
+
+    .back-to-menu a {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: transparent;
+      color: #008080;
+      border: 2px solid #008080;
+      border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
-      transition: background 0.2s ease;
-      letter-spacing: 0.02em;
-    }
-    .profile-menu a:hover {
-      background: #f0e68c;
-      color: #008080;
+      transition: background 0.3s, color 0.3s;
     }
 
-    /* Dashboard Widgets */
-    .dashboard-widgets {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 2.5rem;
+    .back-to-menu a:hover,
+    .back-to-menu a:focus {
+      background-color: #008080;
+      color: white;
     }
 
-    .widget {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      padding: 2rem 2.5rem;
-      color: #004d4d;
-      letter-spacing: 0.02em;
-      transition: box-shadow 0.3s ease;
-    }
-    .widget:hover {
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-    }
-    .widget h2 {
-      margin-top: 0;
-      margin-bottom: 1.2rem;
-      font-weight: 700;
-      font-size: 1.6rem;
-      color: #008080;
-      border-bottom: 3px solid #ffd700;
-      padding-bottom: 0.4rem;
-      letter-spacing: 0.04em;
-    }
-    .widget ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-      color: #666;
-      font-weight: 600;
-    }
-    .widget ul li {
-      margin-bottom: 1rem;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-    .widget ul li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: #ffd700;
-      font-weight: 900;
-      font-size: 1.4rem;
-      top: 0;
-      line-height: 1;
+    /* Responsive typography & spacing */
+    @media (max-width: 768px) {
+      .login-container {
+        padding: 2rem 1.5rem;
+      }
+      .login-container h1 {
+        font-size: 1.75rem;
+      }
     }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 1.5rem 1rem;
       }
-      aside.sidebar {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 1rem;
+      .login-container h1 {
+        font-size: 1.5rem;
       }
-      aside.sidebar nav ul {
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-      }
-      aside.sidebar nav ul li {
-        margin-bottom: 0;
-      }
-      main.main-content {
-        padding: 1rem 1.5rem 2rem;
-      }
-      header.header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-      .dashboard-widgets {
-        grid-template-columns: 1fr;
+      label, input, button {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar" aria-label="Primary Navigation">
-      <div class="logo">Nkoshilo</div>
-      <nav>
-        <ul>
-          <li><a href="index.html" class="active" aria-current="page">Dashboard</a></li>
-          <li><a href="subjects.html">Subjects</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="announcements.html">Announcements</a></li>
-          <li><a href="profile.html">Profile</a></li>
-          <li><a href="login.html">Logout</a></li>
-        </ul>
-      </nav>
-    </aside>
+  <div class="login-container" role="main" aria-label="Login form">
+    <h1>Welcome Back</h1>
+    <p>Login to Nkoshilo Portal</p>
+    <form id="login-form" novalidate>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required autocomplete="username" />
 
-    <main class="main-content" role="main">
-      <header class="header">
-        <div class="welcome">
-          <h1>Welcome back, Student!</h1>
-          <p>Your personalized dashboard</p>
-        </div>
-        <div class="header-actions">
-          <button class="announcements-btn" aria-label="View announcements">🔔</button>
-          <div class="profile">
-            <button class="profile-btn" aria-haspopup="true" aria-expanded="false" aria-label="User menu">
-              <img src="images/student-avatar.png" alt="Student Avatar" />
-            </button>
-            <ul class="profile-menu" role="menu" aria-label="User options">
-              <li role="none"><a role="menuitem" href="profile.html">My Profile</a></li>
-              <li role="none"><a role="menuitem" href="login.html">Logout</a></li>
-            </ul>
-          </div>
-        </div>
-      </header>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" />
 
-      <section class="dashboard-widgets">
-        <article class="widget" tabindex="0" aria-label="Upcoming Assignments">
-          <h2>Upcoming Assignments</h2>
-          <ul>
-            <li>Math Homework - Due 15 June</li>
-            <li>Science Project - Due 20 June</li>
-            <li>History Essay - Due 22 June</li>
-          </ul>
-        </article>
+      <button type="submit">Login</button>
+    </form>
 
-        <article class="widget" tabindex="0" aria-label="Recent Announcements">
-          <h2>Recent Announcements</h2>
-          <ul>
-            <li>School closed on 18 June for public holiday</li>
-            <li>New library books available</li>
-            <li>Exam schedule released</li>
-          </ul>
-        </article>
+    <div class="back-to-menu">
+      <a href="../menu.html">← Back to Menu</a>
+    </div>
 
-        <article class="widget" tabindex="0" aria-label="Latest Grades">
-          <h2>Latest Grades</h2>
-          <ul>
-            <li>Math: 88%</li>
-            <li>English: 92%</li>
-            <li>Science: 85%</li>
-          </ul>
-        </article>
-
-        <article class="widget" tabindex="0" aria-label="Notifications">
-          <h2>Notifications</h2>
-          <ul>
-            <li>Parent-teacher meeting on 25 June</li>
-            <li>Submit school trip permission forms</li>
-          </ul>
-        </article>
-      </section>
-    </main>
+    <div class="footer-text">
+      Don’t have an account? <a href="#">Contact Admin</a>
+    </div>
   </div>
 
   <script>
-    // Profile menu toggle
-    const profileBtn = document.querySelector('.profile-btn');
-    const profileMenu = document.querySelector('.profile-menu');
+    // Simple JS login demo, no backend needed
+    document.getElementById('login-form').addEventListener('submit', e => {
+      e.preventDefault();
 
-    profileBtn.addEventListener('click', () => {
-      const isExpanded = profileBtn.getAttribute('aria-expanded') === 'true';
-      profileBtn.setAttribute('aria-expanded', String(!isExpanded));
-      profileMenu.classList.toggle('show');
-    });
+      const username = e.target.username.value.trim();
+      const password = e.target.password.value;
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
-        profileBtn.setAttribute('aria-expanded', 'false');
-        profileMenu.classList.remove('show');
+      if(username === 'student' && password === 'password123') {
+        alert('Login successful!');
+        window.location.href = 'student-portal/index.html';
+      } else {
+        alert('Invalid credentials.');
       }
     });
   </script>
