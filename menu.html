@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nkoshilo Secondary School – Menu</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #f0f4f5; /* Light grey */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: #008080; /* Teal */
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.25s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: #ffd479; /* Warm yellow accent */
+      outline: none;
+    }
+
+    /* Main container */
+    main {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Section title */
+    main h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #008080; /* Teal */
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    /* Card grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.8rem;
+    }
+
+    /* Card styles */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.05);
+      padding: 1.8rem 1.5rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .card:hover,
+    .card:focus {
+      border-color: #ffd479; /* Yellow accent */
+      box-shadow: 0 8px 20px rgb(255 212 121 / 0.4);
+      transform: translateY(-6px);
+      outline: none;
+    }
+
+    .card h3 {
+      margin: 0 0 0.6rem 0;
+      font-size: 1.3rem;
+      color: #008080; /* Teal */
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 1rem;
+      color: #666; /* Grey */
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      background: #008080;
+      color: #fff;
+      text-align: center;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 500px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 0.8rem;
+      }
+      nav a {
+        margin-left: 0;
+        margin-right: 1rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Nkoshilo Secondary</h1>
+    <nav>
+      <a href="homepage.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="admissions.html">Admissions</a>
+      <a href="apply.html">Apply</a>
+      <a href="contact.html">Contact</a>
+      <a href="admin-login.html" style="opacity: 0.8;">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Explore More</h2>
+    <div class="card-grid">
+      <a href="student-portal/login.html" class="card" tabindex="0">
+        <h3>Student Portal</h3>
+        <p>Check results, assignments, timetable, and school updates.</p>
+      </a>
+      <a href="gallery.html" class="card" tabindex="0">
+        <h3>Gallery</h3>
+        <p>See life at Nkoshilo through pictures and highlights.</p>
+      </a>
+      <a href="studentlife.html" class="card" tabindex="0">
+        <h3>Student Life</h3>
+        <p>Clubs, sports, activities and more to engage you.</p>
+      </a>
+      <a href="news.html" class="card" tabindex="0">
+        <h3>School News</h3>
+        <p>Stay updated with the latest announcements and events.</p>
+      </a>
+      <a href="faq.html" class="card" tabindex="0">
+        <h3>FAQ</h3>
+        <p>Find answers to common questions about the school.</p>
+      </a>
+      <a href="privacypolicy.html" class="card" tabindex="0">
+        <h3>Privacy Policy</h3>
+        <p>Your data is safe and protected with us.</p>
+      </a>
+      <a href="staff.html" class="card" tabindex="0">
+        <h3>Our Staff</h3>
+        <p>Meet our passionate educators and leaders.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Nkoshilo Secondary School. All rights reserved.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nkoshilo | Dashboard</title>
+  <style>
+    :root {
+      --primary: #008080;
+      --bg: #f4f7f9;
+      --white: #fff;
+      --text-dark: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: var(--bg);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    nav.sidebar {
+      width: 220px;
+      background-color: var(--primary);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    nav.sidebar h2 {
+      margin-bottom: 2rem;
+    }
+
+    nav.sidebar a {
+      color: var(--white);
+      text-decoration: none;
+      margin: 0.7rem 0;
+      padding: 0.5rem;
+      border-radius: 5px;
+      display: block;
+      transition: background 0.2s;
+    }
+
+    nav.sidebar a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .main {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .welcome {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      flex: 1 1 200px;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* Mobile styles */
+    .menu-toggle {
+      display: none;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      z-index: 999;
+    }
+
+    @media (max-width: 768px) {
+      nav.sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        z-index: 998;
+      }
+
+      nav.sidebar.active {
+        transform: translateX(0);
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      body {
+        flex-direction: column;
+      }
+
+      .main {
+        padding-top: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+
+  <nav class="sidebar" id="sidebar">
+    <h2>Nkoshilo</h2>
+    <a href="admin.html">Dashboard</a>
+    <a href="admin/students.html">Students</a>
+    <a href="admin/">Teachers</a>
+    <a href="admin/classes.html">Classes</a>
+    <a href="admin/announcements.html">Announcements</a>
+    <a href="admin/setting.html">Settings</a>
+    <a href="admin/studentmanagement.html">Student Management</a>
+    <a href="menu.html">← Back to Menu</a>
+  </nav>
+
+  <main class="main">
+    <div class="welcome">Welcome back, Admin 👋</div>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Total Students</h3>
+        <p>324</p>
+      </div>
+      <div class="card">
+        <h3>Attendance</h3>
+        <p>All</p>
+      </div>
+      <div class="card">
+        <h3>Active Classes</h3>
+        <p>18</p>
+      </div>
+      <div class="card">
+        <h3>Total Teachers</h3>
+        <p>21</p>
+      </div>
+      <div class="card">
+        <h3>Upcoming Exams</h3>
+        <p>5</p>
+      </div>
+      <div class="card">
+        <h3>Unread Announcements</h3>
+        <p>4</p>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>

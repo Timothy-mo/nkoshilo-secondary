@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Teachers Management</title>
+<style>
+  :root {
+    --bg-black: #000000;
+    --white: #ffffff;
+    --teal: #5ce1e6;
+    --grey: #8c8c8c;
+    --yellow: #ffd479;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg-black);
+    color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  header {
+    width: 100%;
+    max-width: 700px;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    margin: 0;
+    color: var(--teal);
+  }
+
+  h2 {
+    font-weight: 500;
+    opacity: 0.7;
+    margin: 0;
+    color: var(--grey);
+  }
+
+  main {
+    width: 100%;
+    max-width: 700px;
+    flex-grow: 1;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  input[type="text"], input[type="email"] {
+    background: transparent;
+    border: 1px solid var(--teal);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    font-family: inherit;
+  }
+
+  input::placeholder {
+    color: var(--grey);
+    opacity: 0.7;
+  }
+
+  button {
+    border: 1px solid var(--yellow);
+    background: transparent;
+    color: var(--yellow);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    align-self: flex-start;
+    width: fit-content;
+  }
+
+  button:hover,
+  button:focus {
+    background-color: var(--yellow);
+    color: var(--bg-black);
+    outline: none;
+  }
+
+  .teacher-list {
+    border-top: 1px solid var(--teal);
+    padding-top: 1rem;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+
+  .teacher-item {
+    border: 1px solid var(--teal);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .teacher-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .teacher-name {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--teal);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .teacher-email {
+    font-size: 0.9rem;
+    color: var(--grey);
+  }
+
+  .delete-btn {
+    border: 1px solid var(--yellow);
+    background: transparent;
+    color: var(--yellow);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .delete-btn:hover,
+  .delete-btn:focus {
+    background-color: var(--yellow);
+    color: var(--bg-black);
+    outline: none;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Admin Teachers</h1>
+    <h2>Manage teacher records</h2>
+  </header>
+
+  <main role="main" aria-label="Admin teachers form and list">
+    <form id="teacherForm" aria-label="Add new teacher">
+      <input type="text" id="teacherName" name="teacherName" placeholder="Teacher Name" required />
+      <input type="email" id="teacherEmail" name="teacherEmail" placeholder="Teacher Email" required />
+      <button type="submit">Add Teacher</button>
+    </form>
+
+    <section class="teacher-list" id="teacherList" aria-live="polite" aria-relevant="additions">
+      <!-- Teachers will appear here -->
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('teacherForm');
+    const teacherList = document.getElementById('teacherList');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = form.teacherName.value.trim();
+      const email = form.teacherEmail.value.trim();
+
+      if (!name || !email) return;
+
+      const teacherItem = document.createElement('article');
+      teacherItem.className = 'teacher-item';
+
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'teacher-info';
+
+      const teacherNameEl = document.createElement('h3');
+      teacherNameEl.className = 'teacher-name';
+      teacherNameEl.textContent = name;
+
+      const teacherEmailEl = document.createElement('p');
+      teacherEmailEl.className = 'teacher-email';
+      teacherEmailEl.textContent = email;
+
+      infoDiv.appendChild(teacherNameEl);
+      infoDiv.appendChild(teacherEmailEl);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.type = 'button';
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', () => {
+        teacherList.removeChild(teacherItem);
+      });
+
+      teacherItem.appendChild(infoDiv);
+      teacherItem.appendChild(deleteBtn);
+
+      teacherList.prepend(teacherItem);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>

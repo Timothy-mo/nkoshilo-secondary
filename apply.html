@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Application</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f6f7;
+    color: #2f3a3a;
+    padding: 2rem;
+    margin: 0;
+  }
+  h1 {
+    text-align: center;
+    color: #008080;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .form-container {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  }
+  .error-border {
+    border-color: red !important;
+  }
+  .checkbox-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .checkbox-group label {
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  .submit-btn {
+    margin-top: 2rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    background-color: #008080;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  .submit-btn:hover {
+    background-color: #006666;
+  }
+
+  .popup {
+    display: none;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-top: 1rem;
+    animation: fadeOut 5s forwards;
+  }
+
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+  }
+</style>
+</head>
+<body>
+<main role="main" aria-label="Application Form">
+  <div class="form-container">
+    <h1>Application</h1>
+    <form id="applicationForm" novalidate>
+      <label for="firstNames">First Names (as per ID)</label>
+      <input type="text" id="firstNames" name="firstNames" required />
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" required />
+
+      <label for="dob">Birth Date (DD/MM/YYYY)</label>
+      <input type="text" id="dob" name="dob" maxlength="10" placeholder="DD/MM/YYYY" required oninput="autoFormatDate(this)" />
+
+      <label for="grade">Grade Applying For</label>
+      <select name="grade" id="grade" required onchange="toggleStream(this)">
+        <option value="">-- Select Grade --</option>
+        <option value="8">Grade 8</option>
+        <option value="9">Grade 9</option>
+        <option value="10">Grade 10</option>
+        <option value="11">Grade 11</option>
+        <option value="12">Grade 12</option>
+      </select>
+
+      <div id="streamWrapper" style="display:none;">
+        <label for="stream">Stream</label>
+        <select name="stream" id="stream">
+          <option value="">-- Select Stream --</option>
+          <option value="General Science">General Science</option>
+          <option value="Agricultural Science">Agricultural Science</option>
+          <option value="General Stream">General Stream</option>
+          <option value="Commerce">Commerce</option>
+        </select>
+      </div>
+
+      <label for="idNumber">ID Number</label>
+      <input type="text" id="idNumber" name="idNumber" required />
+
+      <label for="ethnicity">Ethnicity (Optional)</label>
+      <input type="text" id="ethnicity" name="ethnicity" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="whatsapp">WhatsApp Number (Optional)</label>
+      <input type="tel" id="whatsapp" name="whatsapp" />
+
+      <label for="guardianRelation">Guardian</label>
+      <select name="guardianRelation" id="guardianRelation" required onchange="toggleCustomGuardian(this)">
+        <option value="">-- Select Relation --</option>
+        <option value="Mother">Mother</option>
+        <option value="Father">Father</option>
+        <option value="Brother">Brother</option>
+        <option value="Sister">Sister</option>
+        <option value="Aunt">Aunt</option>
+        <option value="Uncle">Uncle</option>
+        <option value="Grandparent">Grandparent</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <div id="customGuardianWrapper" style="display: none;">
+        <label for="customGuardian">Please specify guardian relation</label>
+        <input type="text" id="customGuardian" name="customGuardian" />
+      </div>
+
+      <label for="guardianFullName">Guardian Full Names</label>
+      <input type="text" id="guardianFullName" name="guardianFullName" required />
+
+      <label for="guardianPhone">Guardian Phone</label>
+      <input type="tel" id="guardianPhone" name="guardianPhone" required />
+
+      <label for="emergencyPhone">Emergency Contact</label>
+      <input type="tel" id="emergencyPhone" name="emergencyPhone" required />
+
+      <label>Gender</label>
+      <div class="checkbox-group" role="radiogroup" aria-required="true" aria-labelledby="gender-label">
+        <label><input type="radio" name="gender" value="Male" required /> Male</label>
+        <label><input type="radio" name="gender" value="Female" /> Female</label>
+      </div>
+
+      <label for="reportCard">Latest Report Card (PDF/JPG/PNG)</label>
+      <input type="file" id="reportCard" name="reportCard" accept=".pdf,.jpg,.jpeg,.png" required />
+
+      <label for="idCopy">ID Copy</label>
+      <input type="file" id="idCopy" name="idCopy" accept=".pdf,.jpg,.jpeg,.png" required />
+
+      <label for="parentIdCopy">Parent/guardian’s certified ID copy</label>
+      <input type="file" id="parentIdCopy" name="parentIdCopy" accept=".pdf,.jpg,.jpeg,.png" required />
+
+      <label for="proofResidence">Proof of residence (not older than 3 months)</label>
+      <input type="file" id="proofResidence" name="proofResidence" accept=".pdf,.jpg,.jpeg,.png" required />
+
+      <label for="transferLetter">Transfer letter (for learners from other schools)</label>
+      <input type="file" id="transferLetter" name="transferLetter" accept=".pdf,.jpg,.jpeg,.png" />
+
+      <label for="additionalFiles">Additional Files (Optional)</label>
+      <input type="file" id="additionalFiles" name="additionalFiles" multiple />
+
+      <label for="disabilities">Disabilities or Additional Notes (Optional)</label>
+      <textarea id="disabilities" name="disabilities" rows="4" placeholder="Write here..."></textarea>
+
+      <div id="popup" class="popup" role="alert" aria-live="assertive">Go fill all mandatory areas.</div>
+      <button type="submit" class="submit-btn">Submit Application</button>
+    </form>
+  </div>
+</main>
+
+<script>
+  function autoFormatDate(input) {
+    let val = input.value.replace(/\D/g, "").slice(0,8);
+    if (val.length >= 5) {
+      input.value = val.slice(0,2) + '/' + val.slice(2,4) + '/' + val.slice(4);
+    } else if (val.length >= 3) {
+      input.value = val.slice(0,2) + '/' + val.slice(2);
+    } else {
+      input.value = val;
+    }
+  }
+
+  function toggleStream(select) {
+    const streamWrapper = document.getElementById('streamWrapper');
+    if (select.value === "10" || select.value === "11" || select.value === "12") {
+      streamWrapper.style.display = "block";
+      document.getElementById('stream').setAttribute('required', 'required');
+    } else {
+      streamWrapper.style.display = "none";
+      document.getElementById('stream').removeAttribute('required');
+      document.getElementById('stream').value = "";
+    }
+  }
+
+  function toggleCustomGuardian(select) {
+    const customWrapper = document.getElementById('customGuardianWrapper');
+    const customInput = document.getElementById('customGuardian');
+    if (select.value === "Other") {
+      customWrapper.style.display = "block";
+      customInput.setAttribute('required', 'required');
+    } else {
+      customWrapper.style.display = "none";
+      customInput.removeAttribute('required');
+      customInput.value = "";
+    }
+  }
+
+  function showPopup(message) {
+    const popup = document.getElementById('popup');
+    popup.textContent = message;
+    popup.style.display = "block";
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 5000);
+  }
+
+  function validateFileInput(input) {
+    if (input.required && input.files.length === 0) {
+      return false;
+    }
+    return true;
+  }
+
+  document.getElementById('applicationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Reset all error borders
+    [...this.elements].forEach(el => el.classList.remove('error-border'));
+
+    const requiredFields = [
+      'firstNames',
+      'lastName',
+      'dob',
+      'grade',
+      'idNumber',
+      'email',
+      'phone',
+      'guardianRelation',
+      'guardianFullName',
+      'guardianPhone',
+      'emergencyPhone',
+      'reportCard',
+      'idCopy',
+      'parentIdCopy',
+      'proofResidence'
+    ];
+
+    // Add stream if visible
+    if (document.getElementById('streamWrapper').style.display === 'block') {
+      requiredFields.push('stream');
+    }
+
+    // Add customGuardian if visible
+    if (document.getElementById('customGuardianWrapper').style.display === 'block') {
+      requiredFields.push('customGuardian');
+    }
+
+    let valid = true;
+
+    // Check all required text/select inputs
+    for (const id of requiredFields) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      if (el.type === "file") {
+        if (!validateFileInput(el)) {
+          valid = false;
+          el.classList.add('error-border');
+        }
+      } else if (el.value.trim() === "") {
+        valid = false;
+        el.classList.add('error-border');
+      }
+    }
+
+    // Check gender radio
+    const genderChecked = [...this.elements['gender']].some(radio => radio.checked);
+    if (!genderChecked) {
+      valid = false;
+      // highlight gender group labels
+      document.querySelectorAll('input[name="gender"]').forEach(radio => {
+        radio.parentElement.classList.add('error-border');
+      });
+    } else {
+      document.querySelectorAll('input[name="gender"]').forEach(radio => {
+        radio.parentElement.classList.remove('error-border');
+      });
+    }
+
+    if (!valid) {
+      showPopup("Go fill all mandatory areas.");
+      return;
+    }
+
+    // All valid, proceed (here you can handle form submission, e.g., AJAX, etc.)
+    alert("Form submitted successfully!");
+    this.reset();
+    document.getElementById('streamWrapper').style.display = "none";
+    document.getElementById('customGuardianWrapper').style.display = "none";
+  });
+</script>
+</body>
+</html>

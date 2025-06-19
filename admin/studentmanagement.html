@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Management</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: system-ui, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #004d4d;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .controls button, .controls select {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background: #008080;
+      color: white;
+    }
+    .actions button {
+      margin-right: 0.5rem;
+      padding: 0.25rem 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Management</h1>
+
+  <div class="controls">
+    <button onclick="addStudent()">Add Student</button>
+    <button onclick="location.href='../admin.html'">Menu</button>
+
+    <select id="gradeFilter" onchange="applyFilters()">
+      <option value="">All Grades</option>
+      <option value="8">Grade 8</option>
+      <option value="9">Grade 9</option>
+      <option value="10">Grade 10</option>
+      <option value="11">Grade 11</option>
+      <option value="12">Grade 12</option>
+    </select>
+
+    <select id="streamFilter" onchange="applyFilters()">
+      <option value="">All Streams</option>
+      <option value="Science">Science</option>
+      <option value="Commerce">Commerce</option>
+      <option value="Technical">Technical</option>
+      <option value="General">General</option>
+    </select>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>Grade</th>
+        <th>Stream</th>
+        <th>Signup Code</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+
+  <script>
+    const students = [
+      { fullName: "Matome Bopape", username: "mtBopape", grade: "11", stream: "Science", signupCode: "NKSH12345", status: "Used" },
+      { fullName: "John Mamabolo", username: "jMam", grade: "10", stream: "Commerce", signupCode: "NKSH54321", status: "Not Used" }
+    ];
+
+    function renderTable(data) {
+      const tbody = document.getElementById("studentTable");
+      tbody.innerHTML = "";
+      data.forEach((student, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${student.fullName}</td>
+          <td>${student.username}</td>
+          <td>${student.grade}</td>
+          <td>${student.stream}</td>
+          <td>${student.signupCode}</td>
+          <td>${student.status}</td>
+          <td class="actions">
+            <button onclick="editStudent(${index})">Edit</button>
+            <button onclick="deleteStudent(${index})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function addStudent() {
+      const fullName = prompt("Enter full name:");
+      if (!fullName) return;
+
+      const username = prompt("Enter username:");
+      if (!username) return;
+
+      const grade = prompt("Enter grade (8-12):");
+      if (!["8", "9", "10", "11", "12"].includes(grade)) return alert("Invalid grade.");
+
+      const stream = prompt("Enter stream (General Science, Commerce, Agricultural Science, General):");
+      if (!["General Science", "Commerce", "Agricultural Science", "General"].includes(stream)) return alert("Invalid stream.");
+
+      const signupCode = prompt("Enter signup code:");
+      if (!signupCode) return;
+
+      const status = prompt("Enter status (Used or Not Used):");
+      if (!["Used", "Not Used"].includes(status)) return alert("Invalid status.");
+
+      students.push({ fullName, username, grade, stream, signupCode, status });
+      applyFilters();
+    }
+
+    function editStudent(index) {
+      const s = students[index];
+
+      const fullName = prompt("Edit full name:", s.fullName);
+      if (!fullName) return;
+
+      const username = prompt("Edit username:", s.username);
+      if (!username) return;
+
+      const grade = prompt("Edit grade (8-12):", s.grade);
+      if (!["8", "9", "10", "11", "12"].includes(grade)) return alert("Invalid grade.");
+
+      const stream = prompt("Edit stream (Science, Commerce, Technical, General):", s.stream);
+      if (!["Science", "Commerce", "Technical", "General"].includes(stream)) return alert("Invalid stream.");
+
+      const signupCode = prompt("Edit signup code:", s.signupCode);
+      if (!signupCode) return;
+
+      const status = prompt("Edit status (Used or Not Used):", s.status);
+      if (!["Used", "Not Used"].includes(status)) return alert("Invalid status.");
+
+      students[index] = { fullName, username, grade, stream, signupCode, status };
+      applyFilters();
+    }
+
+    function deleteStudent(index) {
+      if (confirm("Are you sure you want to delete this student?")) {
+        students.splice(index, 1);
+        applyFilters();
+      }
+    }
+
+    function applyFilters() {
+      const grade = document.getElementById("gradeFilter").value;
+      const stream = document.getElementById("streamFilter").value;
+
+      const filtered = students.filter(s =>
+        (grade === "" || s.grade === grade) &&
+        (stream === "" || s.stream === stream)
+      );
+
+      renderTable(filtered);
+    }
+
+    // Initial render
+    renderTable(students);
+  </script>
+</body>
+</html>

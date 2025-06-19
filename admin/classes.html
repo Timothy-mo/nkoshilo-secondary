@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Classes Management</title>
+<style>
+  /* Colors */
+  :root {
+    --bg-black: #ffffff;
+    --white: #ffffff;
+    --teal: #5ce1e6;
+    --grey: #8c8c8c;
+    --yellow: #ffd479;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg-black);
+    color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  header {
+    width: 100%;
+    max-width: 700px;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    margin: 0;
+    color: var(--teal);
+  }
+
+  h2 {
+    font-weight: 500;
+    opacity: 0.7;
+    margin: 0;
+    color: var(--grey);
+  }
+
+  main {
+    width: 100%;
+    max-width: 700px;
+    flex-grow: 1;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  input[type="text"], input[type="number"] {
+    background: transparent;
+    border: 1px solid var(--teal);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    font-family: inherit;
+  }
+
+  input::placeholder {
+    color: var(--grey);
+    opacity: 0.7;
+  }
+
+  button {
+    border: 1px solid var(--yellow);
+    background: transparent;
+    color: var(--yellow);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    align-self: flex-start;
+    width: fit-content;
+  }
+
+  button:hover,
+  button:focus {
+    background-color: var(--yellow);
+    color: var(--bg-black);
+    outline: none;
+  }
+
+  .class-list {
+    border-top: 1px solid var(--teal);
+    padding-top: 1rem;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+
+  .class-item {
+    border: 1px solid var(--teal);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .class-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .class-name {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--teal);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .class-details {
+    font-size: 0.9rem;
+    color: var(--grey);
+  }
+
+  .delete-btn {
+    border: 1px solid var(--yellow);
+    background: transparent;
+    color: var(--yellow);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .delete-btn:hover,
+  .delete-btn:focus {
+    background-color: var(--yellow);
+    color: var(--bg-black);
+    outline: none;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Admin Classes</h1>
+    <h2>Create and manage classes</h2>
+  </header>
+
+  <main role="main" aria-label="Admin classes form and list">
+    <form id="classForm" aria-label="Create new class">
+      <input type="text" id="className" name="className" placeholder="Class Name" required />
+      <input type="number" id="classCapacity" name="classCapacity" placeholder="Capacity" min="1" required />
+      <button type="submit">Add Class</button>
+    </form>
+
+    <section class="class-list" id="classList" aria-live="polite" aria-relevant="additions">
+      <!-- Classes will appear here -->
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById('classForm');
+    const classList = document.getElementById('classList');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = form.className.value.trim();
+      const capacity = form.classCapacity.value.trim();
+
+      if (!name || !capacity) return;
+
+      const classItem = document.createElement('article');
+      classItem.className = 'class-item';
+
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'class-info';
+
+      const classNameEl = document.createElement('h3');
+      classNameEl.className = 'class-name';
+      classNameEl.textContent = name;
+
+      const classDetails = document.createElement('p');
+      classDetails.className = 'class-details';
+      classDetails.textContent = `Capacity: ${capacity}`;
+
+      infoDiv.appendChild(classNameEl);
+      infoDiv.appendChild(classDetails);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.type = 'button';
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', () => {
+        classList.removeChild(classItem);
+      });
+
+      classItem.appendChild(infoDiv);
+      classItem.appendChild(deleteBtn);
+
+      classList.prepend(classItem);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nkoshilo | Announcements Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Quill Rich Text Editor CSS -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>Announcements Admin</h1>
+    <button id="btnNew" aria-label="Create new announcement">+ New Announcement</button>
+  </header>
+
+  <section class="filters" aria-label="Announcement Filters">
+    <input type="search" id="searchInput" placeholder="Search announcements..." aria-label="Search announcements" />
+    
+    <select id="filterAudience" aria-label="Filter by Audience">
+      <option value="all">All Audiences</option>
+      <option value="students">Students</option>
+      <option value="teachers">Teachers</option>
+      <option value="parents">Parents</option>
+      <option value="custom">Custom Group</option>
+    </select>
+    
+    <select id="filterPriority" aria-label="Filter by Priority">
+      <option value="all">All Priorities</option>
+      <option value="urgent">Urgent</option>
+      <option value="info">Info</option>
+      <option value="reminder">Reminder</option>
+    </select>
+
+    <label for="filterDateStart">From:</label>
+    <input type="date" id="filterDateStart" aria-label="Filter from date" />
+    <label for="filterDateEnd">To:</label>
+    <input type="date" id="filterDateEnd" aria-label="Filter to date" />
+  </section>
+
+  <main id="announcementsList" aria-live="polite" aria-relevant="additions removals">
+    <!-- Announcement cards inserted here -->
+  </main>
+
+  <!-- Modal for New/Edit Announcement -->
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-content">
+      <header>
+        <h2 id="modalTitle">New Announcement</h2>
+        <button id="modalClose" aria-label="Close modal">&times;</button>
+      </header>
+
+      <form id="announcementForm">
+        <label for="titleInput">Title<span aria-hidden="true">*</span></label>
+        <input type="text" id="titleInput" name="title" required autocomplete="off" />
+
+        <label for="quillEditor">Content<span aria-hidden="true">*</span></label>
+        <div id="quillEditor" aria-label="Announcement content editor" role="textbox"></div>
+
+        <label for="audienceSelect">Audience</label>
+        <select id="audienceSelect" name="audience" required>
+          <option value="students">Students</option>
+          <option value="teachers">Teachers</option>
+          <option value="parents">Parents</option>
+          <option value="custom">Custom Group</option>
+        </select>
+
+        <label for="customAudience" id="customAudienceLabel" hidden>Custom Audience (comma-separated emails or groups)</label>
+        <input type="text" id="customAudience" name="customAudience" placeholder="e.g. grade10,clubA" hidden autocomplete="off" />
+
+        <label for="prioritySelect">Priority</label>
+        <select id="prioritySelect" name="priority">
+          <option value="info">Info</option>
+          <option value="urgent">Urgent</option>
+          <option value="reminder">Reminder</option>
+        </select>
+
+        <label for="publishStart">Publish From</label>
+        <input type="datetime-local" id="publishStart" name="publishStart" required />
+
+        <label for="publishEnd">Expires On</label>
+        <input type="datetime-local" id="publishEnd" name="publishEnd" required />
+
+        <div class="form-actions">
+          <button type="submit" id="submitBtn">Save Announcement</button>
+          <button type="button" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" hidden>
+    <div class="modal-content small">
+      <header>
+        <h2 id="confirmTitle">Confirm Delete</h2>
+      </header>
+      <p>Are you sure you want to delete this announcement?</p>
+      <div class="form-actions">
+        <button id="confirmYes">Yes, Delete</button>
+        <button id="confirmNo">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quill Rich Text Editor JS -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script src="../student-portal/main.js"></script>
+</body>
+</html>

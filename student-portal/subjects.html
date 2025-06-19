@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nkoshilo Student Portal - Subjects</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #f9fafb;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    aside.sidebar {
+      width: 260px;
+      background: #008080;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      box-sizing: border-box;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      text-align: center;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin-bottom: 1.8rem;
+    }
+
+    nav ul li a {
+      color: #b2f7f7;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      display: block;
+      border-left: 4px solid transparent;
+      padding: 0.35rem 0.25rem;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: #fff;
+      border-left-color: #ffd700;
+      background: rgba(255, 215, 0, 0.15);
+      border-radius: 4px 0 0 4px;
+    }
+
+    main.main-content {
+      flex-grow: 1;
+      padding: 2rem 3rem;
+      background: #f4f6f8;
+      overflow-y: auto;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: #004d4d;
+      margin: 0 0 0.5rem;
+    }
+
+    header p {
+      color: #555;
+      font-weight: 500;
+      opacity: 0.75;
+      margin: 0 0 2rem;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .subject-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .subject-card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #004d4d;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+      }
+
+      aside.sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 1rem;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      main.main-content {
+        padding: 1rem 1.5rem;
+      }
+
+      .subjects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">Nkoshilo</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="subjects.html" class="active">Subjects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="announcements.html">Announcements</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header>
+        <h1>Subjects</h1>
+        <p>Click on a subject to explore topics, lessons, and assessments</p>
+      </header>
+
+      <section class="subjects-grid">
+        <div class="subject-card">
+          <h3>Mathematics</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Mathematical Literacy</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Physical Sciences</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Life Sciences</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Agricultural Sciences</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Geography</h3>
+        </div>
+        <div class="subject-card">
+          <h3>History</h3>
+        </div>
+        <div class="subject-card">
+          <h3>English FAL</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Sepedi HL</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Accounting</h3>
+        </div>
+        <div class="subject-card">
+          <h3>Business Studies</h3>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nkoshilo Student Portal - Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #f9fafb;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    aside.sidebar {
+      width: 260px;
+      background: #008080;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      box-sizing: border-box;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+    }
+    aside.sidebar .logo {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 3rem;
+      user-select: none;
+      text-transform: uppercase;
+      color: #fff;
+      text-align: center;
+    }
+    aside.sidebar nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+    }
+    aside.sidebar nav ul li {
+      margin-bottom: 1.8rem;
+    }
+    aside.sidebar nav ul li a {
+      color: #b2f7f7;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: block;
+      padding: 0.35rem 0.25rem;
+      border-left: 4px solid transparent;
+      transition: border-color 0.3s ease, color 0.3s ease;
+      letter-spacing: 0.03em;
+    }
+    aside.sidebar nav ul li a.active,
+    aside.sidebar nav ul li a:hover {
+      color: #fff;
+      border-left-color: #ffd700;
+      background: rgba(255, 215, 0, 0.15);
+      border-radius: 4px 0 0 4px;
+    }
+
+    main.main-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 3rem;
+      background: #f4f6f8;
+      overflow-y: auto;
+    }
+
+    header.header {
+      margin-bottom: 2.5rem;
+    }
+    header h1 {
+      margin: 0 0 0.3rem 0;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #004d4d;
+    }
+    header p {
+      margin: 0;
+      font-weight: 500;
+      color: #555;
+      font-size: 1.1rem;
+      opacity: 0.75;
+      letter-spacing: 0.02em;
+    }
+
+    section.profile-info {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      padding: 2.5rem 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #004d4d;
+      letter-spacing: 0.02em;
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #008080;
+      display: block;
+      margin: 0 auto 1.8rem;
+      border: 4px solid #ffd700;
+      object-fit: cover;
+    }
+
+    form dl {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      row-gap: 1.4rem;
+      column-gap: 2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    form dt {
+      font-weight: 700;
+      color: #008080;
+      letter-spacing: 0.05em;
+      align-self: center;
+    }
+    form dd {
+      margin: 0;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="tel"],
+    form select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      border: 1.8px solid #ddd;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #222;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form input[type="tel"]:focus,
+    form select:focus {
+      outline: none;
+      border-color: #008080;
+      box-shadow: 0 0 5px rgba(0, 128, 128, 0.3);
+    }
+
+    button#save-profile {
+      display: block;
+      margin: 3rem auto 0;
+      padding: 0.65rem 2.5rem;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #008080;
+      background: transparent;
+      border: 2px solid #008080;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+    button#save-profile:hover,
+    button#save-profile:focus {
+      background-color: #008080;
+      color: #fff;
+      outline: none;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+      }
+      aside.sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 1rem;
+      }
+      aside.sidebar nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+      }
+      aside.sidebar nav ul li {
+        margin-bottom: 0;
+      }
+      main.main-content {
+        padding: 1rem 1.5rem 2rem;
+      }
+      section.profile-info {
+        padding: 1.8rem 2rem;
+        max-width: 100%;
+      }
+      form dl {
+        grid-template-columns: 120px 1fr;
+        gap: 1rem;
+      }
+      .profile-photo {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar" aria-label="Primary Navigation">
+      <div class="logo">Nkoshilo</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="subjects.html">Subjects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="announcements.html">Announcements</a></li>
+          <li><a href="profile.html" class="active" aria-current="page">Profile</a></li>
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content" role="main">
+      <header class="header">
+        <h1>Profile</h1>
+        <p>Edit your personal details below</p>
+      </header>
+
+      <section class="profile-info" aria-label="User profile form">
+        <img src="default-profile.png" alt="User profile photo" class="profile-photo" />
+        <form id="profile-form" novalidate>
+          <dl>
+            <dt><label for="fullname">Full Name:</label></dt>
+            <dd><input type="text" id="fullname" name="fullname" required value="" /></dd>
+
+            <dt><label for="studentid">Student ID:</label></dt>
+            <dd><input type="text" id="studentid" name="studentid" required value="" /></dd>
+
+            <dt><label for="email">Email:</label></dt>
+            <dd><input type="email" id="email" name="email" required value="" /></dd>
+
+            <dt><label for="grade">Grade:</label></dt>
+            <dd>
+              <select id="grade" name="grade" required>
+                <option value="" disabled>Select Grade</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11" selected>11</option>
+                <option value="12">12</option>
+              </select>
+            </dd>
+
+            <dt><label for="phone">Phone:</label></dt>
+            <dd><input type="tel" id="phone" name="phone" required value="" /></dd>
+
+            <dt><label for="address">Address:</label></dt>
+            <dd><input type="text" id="address" name="address" required value="" /></dd>
+          </dl>
+          <button id="save-profile" type="submit">Save Profile</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const form = document.getElementById('profile-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Normally, you would send data to your backend here
+      // For demo, just alert success
+      alert('Profile saved successfully!');
+
+      // Optionally, disable inputs or show saved state
+    });
+  </script>
+</body>
+</html>

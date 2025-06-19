@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery | Nkoshilo High School</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #f5f6f7;
+      color: #2f3a3a;
+    }
+
+    main {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #008080;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .gallery-section {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .gallery-section:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .gallery-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .gallery-text h2 {
+      font-size: 1.8rem;
+      color: #008080;
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-text p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .gallery-img {
+      flex: 1;
+      min-width: 280px;
+      cursor: pointer;
+    }
+
+    .gallery-img img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-img img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Fullscreen Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    .modal-content {
+      margin: 5% auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .modal-content:focus {
+      outline: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Floating Back Button */
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #008080;
+      color: white;
+      padding: 0.75rem 1.2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+      z-index: 1001;
+    }
+
+    .back-button:hover {
+      background: #006666;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<main role="main" aria-label="Gallery Page">
+  <h1>Our School Gallery</h1>
+
+  <!-- Section 1 -->
+  <div class="gallery-section">
+    <div class="gallery-text">
+      <h2>Science Fair</h2>
+      <p>Our annual science fair showcases brilliant student inventions, experiments, and real-world problem-solving using STEM principles.</p>
+    </div>
+    <div class="gallery-img">
+      <img src="images/gallery1.jpg" alt="Science Fair" onclick="openModal(this.src)" />
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gallery-section">
+    <div class="gallery-text">
+      <h2>Sports Day</h2>
+      <p>Nkoshilo’s Sports Day brings together athletic spirit, house rivalry, and endless energy. Events range from relays to shot put and more.</p>
+    </div>
+    <div class="gallery-img">
+      <img src="images/gallery2.jpg" alt="Sports Day" onclick="openModal(this.src)" />
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gallery-section">
+    <div class="gallery-text">
+      <h2>Cultural Celebration</h2>
+      <p>Unity in diversity — students take pride in their cultural roots through traditional wear, dance, and food. A colorful, unforgettable day.</p>
+    </div>
+    <div class="gallery-img">
+      <img src="images/gallery3.jpg" alt="Cultural Day" onclick="openModal(this.src)" />
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gallery-section">
+    <div class="gallery-text">
+      <h2>Matric Dance</h2>
+      <p>A milestone celebration of elegance, friendship, and the journey through high school. Our students shine in their best looks.</p>
+    </div>
+    <div class="gallery-img">
+      <img src="images/gallery4.jpg" alt="Matric Dance" onclick="openModal(this.src)" />
+    </div>
+  </div>
+</main>
+
+<!-- Floating Button -->
+<a href="menu.html" class="back-button" aria-label="Back to Menu Page">← Back to Menu</a>
+
+<!-- Fullscreen Modal -->
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modalImg" />
+</div>
+
+<footer>&copy; 2025 Nkoshilo High School. All rights reserved.</footer>
+
+<script>
+  function openModal(src) {
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    modal.style.display = "block";
+    modalImg.src = src;
+  }
+
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+</script>
+
+</body>
+</html>

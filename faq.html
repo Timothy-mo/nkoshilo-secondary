@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ - Nkoshilo Secondary School</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f6f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      color: #222;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-align: center;
+      color: #008080;
+      margin-bottom: 2rem;
+    }
+
+    .faq-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: 0.3s;
+      border-left: 4px solid #008080;
+    }
+
+    .faq-question {
+      padding: 1rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 1.2rem;
+    }
+
+    .faq-answer p {
+      margin: 0.8rem 0 1.2rem;
+      line-height: 1.5;
+    }
+
+    .faq-card.active .faq-answer {
+      max-height: 500px; /* Enough room for most answers */
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-card.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    .contact {
+      margin-top: 3rem;
+      background: #e9f7f6;
+      padding: 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    a {
+      color: #008080;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<main role="main" aria-label="FAQ section">
+  <h1>Frequently Asked Questions</h1>
+
+  <!-- FAQ Cards -->
+  <div class="faq-card">
+    <div class="faq-question">
+      What subjects are offered?
+      <span class="arrow">▼</span>
+    </div>
+    <div class="faq-answer">
+      <p>We offer: English FAL, Sepedi HL, Life Orientation, Life Sciences, Physical Sciences, Agricultural Sciences, Geography, History, Commerce, Business Studies, Mathematics, and Maths Literacy.</p>
+    </div>
+  </div>
+
+  <div class="faq-card">
+    <div class="faq-question">
+      What extracurricular activities are available?
+      <span class="arrow">▼</span>
+    </div>
+    <div class="faq-answer">
+      <p>We provide Soccer, Debate Teams, and Chess Teams to help learners grow beyond the classroom.</p>
+    </div>
+  </div>
+
+  <div class="faq-card">
+    <div class="faq-question">
+      How can I apply?
+      <span class="arrow">▼</span>
+    </div>
+    <div class="faq-answer">
+      <p>To apply, go to our <a href="apply.html">Apply Page</a> and complete the online form. You’ll be contacted after submission.</p>
+    </div>
+  </div>
+
+  <div class="faq-card">
+    <div class="faq-question">
+      What is the school's contact information?
+      <span class="arrow">▼</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        <strong>Tel:</strong> 068 585 4251<br>
+        <strong>Cell:</strong> 063 732 5994 / 072 567 8927<br>
+        <strong>Email:</strong> <a href="mailto:nkoshilohs@gmail.com">nkoshilohs@gmail.com</a><br>
+        <strong>EMIS No:</strong> 923241122<br>
+        <strong>Postal Address:</strong> P.O. Box 981, Sovenga 0727, Mamabolo Circuit
+      </p>
+    </div>
+  </div>
+
+  <div class="contact">
+    Still have questions? Feel free to <a href="mailto:nkoshilohs@gmail.com">email us</a> or call <strong>068 585 4251</strong>.
+  </div>
+</main>
+
+<script>
+  // Add toggle functionality
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const card = q.parentElement;
+      card.classList.toggle('active');
+    });
+  });
+</script>
+
+</body>
+</html>

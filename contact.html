@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Nkoshilo Secondary School</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #008080;
+    }
+
+    .contact-section {
+      background: #fff;
+      border-left: 4px solid #008080;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+
+    .info-label {
+      width: 130px;
+      font-weight: 600;
+      color: #333;
+      flex-shrink: 0;
+    }
+
+    .info-value {
+      color: #444;
+      line-height: 1.4;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .info-value:hover {
+      background-color: #00808020;
+    }
+
+    a {
+      color: #008080;
+      text-decoration: none;
+    }
+
+    .back-link {
+      margin-top: 2rem;
+      text-align: center;
+      display: block;
+      font-size: 0.95rem;
+      color: #008080;
+    }
+
+    #copied-msg {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #copied-msg.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .info-label {
+        width: 110px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<main role="main" aria-label="Contact Page">
+  <h1>Contact Us</h1>
+
+  <div class="contact-section">
+    <div class="info-row">
+      <div class="info-label">Phone:</div>
+      <div class="info-value" onclick="copyText(this)">068 585 4251</div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">Cell:</div>
+      <div class="info-value" onclick="copyText(this)">063 732 5994 / 072 567 8927</div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">Email:</div>
+      <div class="info-value" onclick="copyText(this)">nkoshilohs@gmail.com</div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">EMIS No:</div>
+      <div class="info-value" onclick="copyText(this)">923241122</div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-label">Postal Address:</div>
+      <div class="info-value" onclick="copyText(this)">
+        P.O. Box 981<br>
+        Sovenga 0727<br>
+        Mamabolo Circuit
+      </div>
+    </div>
+  </div>
+
+  <a class="back-link" href="index.html">← Back to Home</a>
+</main>
+
+<div id="copied-msg">Copied!</div>
+
+<script>
+  function copyText(el) {
+    const temp = document.createElement('textarea');
+    temp.value = el.innerText.replace(/\n/g, ' ');
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand('copy');
+    document.body.removeChild(temp);
+
+    const msg = document.getElementById('copied-msg');
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 2000);
+  }
+</script>
+
+</body>
+</html>

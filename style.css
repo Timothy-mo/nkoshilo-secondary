@@ -1,0 +1,141 @@
+/* Reset and base */
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #f0f4f5; /* Light grey */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: #008080; /* Teal */
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.25s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #ffd479; /* Warm yellow accent */
+  outline: none;
+}
+
+/* Main container */
+main {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section title */
+main h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #008080; /* Teal */
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.8rem;
+}
+
+/* Card styles */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.05);
+  padding: 1.8rem 1.5rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.card:hover,
+.card:focus {
+  border-color: #ffd479; /* Yellow accent */
+  box-shadow: 0 8px 20px rgb(255 212 121 / 0.4);
+  transform: translateY(-6px);
+  outline: none;
+}
+
+.card h3 {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.3rem;
+  color: #008080; /* Teal */
+  font-weight: 700;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1rem;
+  color: #666; /* Grey */
+  flex-grow: 1;
+  line-height: 1.4;
+}
+
+/* Footer */
+footer {
+  margin-top: 3rem;
+  padding: 1.5rem 2rem;
+  background: #008080;
+  color: #fff;
+  text-align: center;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Responsive tweaks */
+@media (max-width: 500px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav {
+    margin-top: 0.8rem;
+  }
+  nav a {
+    margin-left: 0;
+    margin-right: 1rem;
+    font-size: 0.95rem;
+  }
+}

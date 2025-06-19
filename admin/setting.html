@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Settings</title>
+  <style>
+    :root {
+      --teal: #008080;
+      --yellow: #ffd700;
+      --light-grey: #f4f4f4;
+      --mid-grey: #ccc;
+      --dark-grey: #2f2f2f;
+      --white: #ffffff;
+      --background-light: var(--light-grey);
+      --background-dark: hsl(0, 0%, 100%);
+      --text-light: var(--dark-grey);
+      --text-dark: var(--white);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-light);
+      padding: 2rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--teal);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--teal);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      padding: 0.5rem 0;
+      font-weight: 600;
+      border-bottom: 1px solid var(--mid-grey);
+    }
+
+    .essential {
+      color: var(--text-light);
+    }
+    .advanced {
+      color: var(--teal);
+    }
+    .optional {
+      color: var(--mid-grey);
+      font-style: italic;
+    }
+
+    /* Dark mode adjustments */
+    body.dark li {
+      border-color: #444;
+    }
+    body.dark .optional {
+      color: #777;
+    }
+    body.dark h1, body.dark h2 {
+      color: #66cccc;
+    }
+
+    /* Theme toggle button */
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: 1px solid currentColor;
+      color: currentColor;
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.2s ease;
+      user-select: none;
+    }
+    #theme-toggle:hover,
+    #theme-toggle:focus {
+      opacity: 1;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">Dark</button>
+
+  <h1>Admin Settings</h1>
+
+  <h2>🡭 Account & Access Management</h2>
+  <ul>
+    <li class="essential">Change Admin Password</li>
+    <li class="advanced">Add/Remove Other Admins</li>
+    <li class="optional">View login history (timestamps, IP/device)</li>
+  </ul>
+
+  <h2>📚 Academic Structure Settings</h2>
+  <ul>
+    <li class="advanced">Add/Edit/Delete Grades & Streams</li>
+    <li class="optional">Assign subjects to each stream</li>
+    <li class="optional">Define terms</li>
+  </ul>
+
+  <h2>🧾 Code Management</h2>
+  <ul>
+    <li class="essential">Generate Signup Codes (manual or auto)</li>
+    <li class="advanced">View used/unused codes (make filterable)</li>
+    <li class="optional">Expire codes after X days</li>
+  </ul>
+
+  <h2>📊 Reports & Insights</h2>
+  <ul>
+    <li class="advanced">View number of students per grade/stream</li>
+    <li class="advanced">Status summary: used vs not used codes</li>
+    <li class="optional">Track recent edits/additions (audit log)</li>
+  </ul>
+
+  <h2>⚙️ System Preferences</h2>
+  <ul>
+    <li class="optional">Theme toggle (Dark/Light)</li>
+    <li class="optional">Enable maintenance mode</li>
+    <li class="advanced">Backup/Restore data</li>
+  </ul>
+
+  <h2>🔐 Security Settings</h2>
+  <ul>
+    <li class="optional">Set max login attempts</li>
+    <li class="optional">Enable/disable student registration</li>
+  </ul>
+
+  <script src="main.js"></script>
+</body>
+</html>
