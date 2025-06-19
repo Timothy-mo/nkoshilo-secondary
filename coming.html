@@ -28,7 +28,7 @@
       text-align: center;
       letter-spacing: 2px;
       position: relative;
-      animation: glitch 2.5s infinite;
+      animation: glitch 2s infinite;
     }
 
     h1::before,
@@ -38,62 +38,44 @@
       top: 0;
       left: 0;
       width: 100%;
-      overflow: hidden;
       color: #0ff;
+      overflow: hidden;
       clip: rect(0, 900px, 0, 0);
     }
 
     h1::before {
-      animation: glitchTop 2.5s infinite linear;
+      animation: glitchTop 2s infinite linear;
     }
 
     h1::after {
       color: #f0f;
-      animation: glitchBottom 2.5s infinite linear;
+      animation: glitchBottom 2s infinite linear;
     }
 
     p {
       margin-top: 1rem;
       font-size: 1.2rem;
       opacity: 0.7;
+      text-align: center;
       animation: fadeIn 3s ease forwards;
     }
 
-    #countdown {
-      font-size: 1.5rem;
-      margin-top: 2rem;
-      color: #0ff;
-      animation: fadeIn 4s ease forwards;
-    }
-
     @keyframes glitchTop {
-      0% {
-        clip: rect(0, 9999px, 0, 0);
-      }
-      5% {
-        clip: rect(0, 9999px, 50%, 0);
-      }
-      10% {
-        clip: rect(0, 9999px, 0, 0);
-      }
+      0% { clip: rect(0, 9999px, 0, 0); }
+      10% { clip: rect(0, 9999px, 20%, 0); }
+      20% { clip: rect(0, 9999px, 0, 0); }
     }
 
     @keyframes glitchBottom {
-      0% {
-        clip: rect(100%, 9999px, 100%, 0);
-      }
-      5% {
-        clip: rect(50%, 9999px, 100%, 0);
-      }
-      10% {
-        clip: rect(100%, 9999px, 100%, 0);
-      }
+      0% { clip: rect(100%, 9999px, 100%, 0); }
+      10% { clip: rect(80%, 9999px, 100%, 0); }
+      20% { clip: rect(100%, 9999px, 100%, 0); }
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(10px);
       }
       to {
         opacity: 1;
@@ -105,42 +87,15 @@
       h1 {
         font-size: 2.2rem;
       }
-      #countdown {
-        font-size: 1.2rem;
+      p {
+        font-size: 1rem;
+        padding: 0 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <h1 data-text="COMING SOON">COMING SOON</h1>
-  <p>We’re building something powerful and beautiful. Stay tuned.</p>
-  <div id="countdown">Launching in: --:--:--:--</div>
-
-  <script>
-    // Countdown Timer
-    const countdownEl = document.getElementById("countdown");
-    const launchDate = new Date();
-    launchDate.setDate(launchDate.getDate() + 7); // Launch in 7 days
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = launchDate - now;
-
-      if (diff <= 0) {
-        countdownEl.innerText = "We're live!";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      countdownEl.innerText = `Launching in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+  <h1 data-text="PAGE COMING SOON">PAGE COMING SOON</h1>
+  <p>This section is still cooking. Check back later.</p>
 </body>
 </html>
